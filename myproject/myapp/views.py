@@ -11,9 +11,11 @@ class FileUploadView(APIView):
 
     def post(self, request, *args, **kwargs):
         file_obj = request.FILES['file']
+        print(file_obj)
         try:
             df = pd.read_csv(file_obj)
             data = df.to_dict(orient='records')
+
             return Response(data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

@@ -24,5 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('upload/', FileUploadView.as_view(), name='file-upload'),
     path('savecolstypes/', saveColsTypesView.as_view(), name='save-cols-types')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
 

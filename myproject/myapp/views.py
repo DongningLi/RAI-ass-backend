@@ -1,36 +1,44 @@
 import json
+from django.apps import apps
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 import pandas as pd
 
 from core.infer_data_types import detect_type, infer_type
-from .models import ColsTypes, FileContent
+from .models import ColsTypes, FileContent, FileContentCollection
 
 
 def save_type_instance(column_types):
 
-    cols_types = ColsTypes (
-        name = column_types["Name"],
-        birthdate = column_types["Birthdate"],
-        score = column_types["Score"],
-        grade = column_types["Grade"]
-    )
+    try:
+        cols_types = ColsTypes (
+            name = column_types["Name"],
+            birthdate = column_types["Birthdate"],
+            score = column_types["Score"],
+            grade = column_types["Grade"]
+        )
 
-    cols_types.save()
+        cols_types.save()
+
+    except Exception as e:
+        print ("save type fails:", e)
 
 def save_content_instance(df):
 
-    for _, row in df.iterrows():
+    try:
+        for _, row in df.iterrows():
 
-        content = FileContent(
-            name = row["Name"],
-            birthdate = row["Birthdate"],
-            score = row["Score"],
-            grade = row["Grade"],
-        )
+            content = FileContent(
+                name = row["Name"],
+                birthdate = row["Birthdate"],
+                score = row["Score"],
+                grade = row["Grade"],
+            )
 
-        content.save()
+            content.save()
+    except Exception as e:
+        print ("save content fails:", e)
 
         
 class FileUploadView(APIView):
@@ -45,8 +53,23 @@ class FileUploadView(APIView):
             column_types = detect_type(df)
             df = infer_type(df,column_types)
 
-            save_type_instance(column_types)
-            save_content_instance(df)
+            FileContentCollection.insert_one(column_types)
+
+
+            # print('------------------1-------------------------')
+
+            # DynamicEmployeeModel = create_dynamic_model('DynamicEmployeeModel', column_types)
+            # print('-----------------2--------------------------')
+            # apps.register_model('myapp', DynamicEmployeeModel)
+
+            # print('------------------3-------------------------')
+            # instance = DynamicEmployeeModel(Name="John Doe", Birthdate="1/01/1991", Score=89, Grade="A")
+            # print('------------------4-------------------------')
+            # instance.save()
+
+
+            # save_type_instance(column_types)
+            # save_content_instance(data_content)
 
             data = {"contents":data_content,
                     "types":column_types}

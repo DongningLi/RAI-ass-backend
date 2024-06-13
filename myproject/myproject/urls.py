@@ -15,11 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls.static import static
 from django.urls import path
-from myapp.views import FileUploadView
+from myapp.views import FileUploadView, saveColsTypesView
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('upload/', FileUploadView.as_view(), name='file-upload'),
-]
+    path('savecolstypes/', saveColsTypesView.as_view(), name='save-cols-types')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -1,4 +1,9 @@
+import csv
+import io
 import json
+from bson import ObjectId
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -8,7 +13,7 @@ import json
 from core.infer_data_types import detect_type, infer_type
 import math
 
-from .models import ColsTypeCollection, FileContentCollection, update_document_in_mongodb
+from .models import ColsTypeCollection, FileContentCollection, GenerateNewFileModel, update_document_in_mongodb
 
 def handle_uploaded_file(file_obj, file_id):
     filename = f"public/uploadedFile_{file_id}.csv"
@@ -100,3 +105,33 @@ class saveColsTypesView(APIView):
             return Response(status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class generateNewFileView(APIView):
+
+    def post(self, request, fileId, *args, **kwargs):
+        try:
+            print(fileId)
+            
+            records = list(FileContentCollection.find({'fileId': fileId}))
+            
+            if not records:
+                    return JsonResponse({'error': 'No records found for the provided fileId'}, status=404)
+
+            # Create a HttpResponse object and set the appropriate CSV headers
+            response = HttpResponse(content_type='text/csv')
+            writer = csv.writer(response)
+
+            # Write the headers (keys of the first record)
+            if records:
+                header = [key for key in records[0].keys() if key != "_id" and key != "fileId"]
+                writer.writerow(header)
+
+                # Write data rows
+                for record in records:
+                    values = [value for key, value in record.items() if key != "_id" and key != "fileId"]
+                    writer.writerow(values)
+
+            return response
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)

@@ -78,6 +78,7 @@ def detect_type(df):
 def infer_type(df,column_types):
     for col in df.columns:
         try:
+            # replace 'Not Available' with np.nan
             df[col] = df[col].replace('Not Available', np.nan).astype(column_types[col])
             continue
         except:

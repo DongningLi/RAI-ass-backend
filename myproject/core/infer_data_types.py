@@ -65,13 +65,12 @@ def detect_col_type(df_sample_col, category_threshold):
             
     return "object"
 
-def detect_type(df):
-    df_sample = read_file(df, 1000)
+def detect_type(df_sample):
+
     category_threshold = 0.5
-
     # detect type of column from sample
-    column_types = {col: detect_col_type(df[col], category_threshold) for col in df_sample.columns}
-
+    column_types = {col: detect_col_type(df_sample[col], category_threshold) for col in df_sample.columns}
+    
     return column_types
 
 #assign type 

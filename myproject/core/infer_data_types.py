@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+from requests import Response
+from rest_framework import status
 
 def read_file(df, sample_size):
 
@@ -81,7 +83,10 @@ def infer_type(df,column_types):
             df[col] = df[col].replace('Not Available', np.nan).astype(column_types[col])
             continue
         except:
-            df[col] = df[col].str.replace("i","j").astype(column_types[col])
-            continue
+            try:
+                df[col] = df[col].str.replace("i","j").astype(column_types[col])
+                continue
+            except Exception as e:
+                return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
     return df

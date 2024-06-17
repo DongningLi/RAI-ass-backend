@@ -109,8 +109,8 @@ class generateNewFileView(APIView):
 
     def post(self, request, fileId, *args, **kwargs):
         try:
-            print(fileId)
             
+            # get records from mongoDB given by file ID
             records = list(FileContentCollection.find({'fileId': fileId}))
             
             if not records:

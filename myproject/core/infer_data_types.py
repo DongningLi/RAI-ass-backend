@@ -84,6 +84,7 @@ def infer_type(df,column_types):
             continue
         except:
             try:
+                # replace the imaginary i with j for complex numbers
                 df[col] = df[col].str.replace("i","j").astype(column_types[col])
                 continue
             except Exception as e:

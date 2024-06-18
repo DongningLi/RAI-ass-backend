@@ -6,8 +6,11 @@ Data Process and Display: creating a web application that processes and displays
 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
+- [Requirements](#Requirements)
 - [Installation](#installation)
-- [Usage](#usage)
+- [Application Port](#Application-port)
+- [Database Configuration](#Database-configuration)
+- [Directory Structure](#Directory-structure)
 
 ## Features
 

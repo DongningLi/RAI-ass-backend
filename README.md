@@ -2,7 +2,7 @@
 
 Data Process and Display: creating a web application that processes and displays data from a CSV file.
 
-Please refer to the frontend repository [https://github.com/DongningLi/RAI-ass-backend](https://github.com/DongningLi/RAI-ass-frontend)
+Please refer to the frontend repository https://github.com/DongningLi/RAI-ass-frontend
 
 ## Table of Contents
 

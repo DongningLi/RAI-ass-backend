@@ -1,0 +1,17 @@
+services:
+
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    ports:
+      - 27017:27017
+
+  raiassbackend:
+    image: raiassbackend
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - mongodb
+    

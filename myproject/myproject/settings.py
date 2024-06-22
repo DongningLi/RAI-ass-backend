@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
-    'myapp.apps.MyappConfig'
+    'myapp.apps.MyappConfig',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -72,21 +72,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
-
-
-# Database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': 'testdb',
-#         'ENFORCE_SCHEMA': False,  # Optional, set to True if you want schema validation
-#         'CLIENT': {
-#             'host': 'mongodb://localhost:27017/',  # e.g., 'mongodb://localhost:27017/'
-#         }
-#     }
-# }
-
-# mongoengine.connect("raidb1",host="mongodb://localhost:27017/")
 
 
 # Password validation

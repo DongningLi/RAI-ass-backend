@@ -1,7 +1,6 @@
 import json
 from bson import ObjectId
 from db_connection import db
-from djongo import models
 
 FileContentCollection = db["file_content"]
 ColsTypeCollection = db["cols_types"]

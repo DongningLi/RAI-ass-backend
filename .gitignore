@@ -3,3 +3,4 @@ myproject/.env
 .vscode/tasks.json
 .vscode/launch.json
 *.pyc
+myproject/db.sqlite3

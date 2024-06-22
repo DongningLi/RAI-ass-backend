@@ -10,8 +10,6 @@ Please refer to the frontend repository https://github.com/DongningLi/RAI-ass-fr
 - [Technologies Used](#technologies-used)
 - [Requirements](#Requirements)
 - [Installation](#installation)
-- [Application Port](#Application-port)
-- [Database Configuration](#Database-configuration)
 - [Directory Structure](#Directory-structure)
 
 ## Features
@@ -32,6 +30,7 @@ Please refer to the frontend repository https://github.com/DongningLi/RAI-ass-fr
 ## Requirements
 
 - Reuqest sent from http://localhost:3000
+- Server will be deployed at http://0.0.0.0:8000/
 
 ## Installation
 
@@ -40,35 +39,10 @@ Please refer to the frontend repository https://github.com/DongningLi/RAI-ass-fr
 $ git clone
 # Go to the root directory
 $ cd myproject
-# Install dependencies
-$ npm install
-# Create migration files
-$ python manage.py makemigrations
-# Apply the migrations to the database
-$ python manage.py migrate
-
-# Start the application
-$ python manage.py runserver
-```
-
-## Application Port
-
-Defautly, port is 8000. To modify the application's port, specify `portNumber` in cmd when running.
-
-```bash
-# Example
-$ python manage.py runserver <portNumber>
-```
-
-## Database Configuration
-
-In the `myproject/db_connection.py` file, set up the **MongoDB** connection, and database name.
-
-```typescript
-url = "mongodb://localhost:27017";
-client = pymongo.MongoClient(url);
-
-db = client["raidb1"];
+# Build docker image
+$ docker build -t raiassbackend .
+# Run docker
+$ docker-compose up -d
 ```
 
 ## Directory Structure
@@ -76,12 +50,13 @@ db = client["raidb1"];
 ```bash
 /RAI-ASS-BACKEND
 |-- /myproject
-|   |-- /core            # Core functionalities for type detect and infer
-|   |-- /myapp           # App functionalities including API generation
-|   |-- /myprject        # Project settings
-|   |-- /public          # Default file downloading location
-|   |-- /db_connection   # Database connection information
-|   |-- /manage.py       # Django's command-line utility for administrative tasks.
-|-- .gitignore           # Files to ignore
-|-- README.md            # Project overview and guidelines
+|   |-- /core               # Core functionalities for type detect and infer
+|   |-- /myapp              # App functionalities including API generation
+|   |-- /myprject           # Project settings
+|   |-- /public             # Default file downloading location
+|   |-- db_connection.py    # Database connection information
+|   |-- manage.py           # Django's command-line utility for administrative tasks
+|   |-- Dockerfile          # Dockerfile
+|-- .gitignore              # Files to ignore
+|-- README.md               # Project overview and guidelines
 ```

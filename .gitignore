@@ -1,2 +1,8 @@
 
 myproject/.env
+.vscode/tasks.json
+.vscode/launch.json
+/myproject/myproject/__pycache__
+/myproject/myapp/__pycache__
+/myproject/myapp/__pycache__
+/myproject/myproject/__pycache__

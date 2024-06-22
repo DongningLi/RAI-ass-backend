@@ -29,8 +29,8 @@ Please refer to the frontend repository https://github.com/DongningLi/RAI-ass-fr
 
 ## Requirements
 
-- Reuqest sent from http://localhost:3000
 - Docker image of front-end has been built
+- Reuqest sent from http://localhost:3000
 - Server could be deployed at http://0.0.0.0:8000/
 
 ## Installation

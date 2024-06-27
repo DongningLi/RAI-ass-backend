@@ -4,4 +4,3 @@ myproject/.env
 .vscode/launch.json
 *.pyc
 myproject/db.sqlite3
-/myproject/public
